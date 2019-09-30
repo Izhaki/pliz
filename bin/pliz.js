@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
 const { resolve } = require('path');
 
+const plizerConfig = resolve(process.cwd(), 'plizers.config.js');
 try {
-  require('@babel/register');
+  require(plizerConfig);
 } catch (error) {
   // Do nothing
 }
@@ -19,24 +19,30 @@ const outputPlizerNames = plizers => {
 };
 
 const run = async () => {
-  const plizerFile = resolve(process.cwd(), 'plizers.js');
-  if (!fs.existsSync(plizerFile)) {
-    throw `No plizers.js in working directory.`;
-  }
+  const plizerFile = resolve(process.cwd(), 'plizers');
 
-  const plizers = require(plizerFile);
+  try {
+    const plizers = require(plizerFile);
 
-  const plizer = plizers[plizerName];
-  if (plizer) {
-    await plizer(args);
-  } else {
-    if (plizerName !== undefined) {
-      console.log(`Could not find plizer "${plizerName}".`);
+    const plizer = plizers[plizerName];
+    if (plizer) {
+      await plizer(args);
+    } else {
+      if (plizerName !== undefined) {
+        console.log(`Could not find plizer "${plizerName}".`);
+      }
+      outputPlizerNames(plizers);
     }
-    outputPlizerNames(plizers);
+  } catch (error) {
+    if (error.code === 'MODULE_NOT_FOUND') {
+      throw `No plizers found.`;
+    }
+    throw error;
   }
 };
 
 run().catch(error => {
-  console.log(error);
+  if (!error.isCanceled) {
+    console.log(error);
+  }
 });

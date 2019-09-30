@@ -1,13 +1,21 @@
-const { execSync } = require('child_process');
+const execa = require('execa');
 
-const exe = command => {
+const exe = async command => {
+  const child = execa.command(command, {
+    encoding: 'utf8',
+    stdio: 'inherit',
+  });
+
+  const onInterrupt = () => {
+    child.cancel();
+  };
+
+  process.on('SIGINT', onInterrupt);
+
   try {
-    execSync(command, {
-      encoding: 'utf8',
-      stdio: 'inherit',
-    });
-  } catch (error) {
-    /* Do nothing - execSync already outputs errors to parent stdout */
+    await child;
+  } finally {
+    process.off('SIGINT', onInterrupt);
   }
 };
 
