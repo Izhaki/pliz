@@ -1,22 +1,36 @@
 const execa = require('execa');
 
+const children = [];
+
+const removeChild = child => {
+  const index = children.indexOf(child);
+  children.splice(index, 1);
+};
+
+const cancelAllChildren = () => {
+  children.forEach(child => {
+    child.cancel();
+  });
+};
+
+process.on('SIGINT', cancelAllChildren);
+process.on('SIGTERM', cancelAllChildren);
+
 const exe = async command => {
   const child = execa.command(command, {
-    encoding: 'utf8',
     stdio: 'inherit',
+    shell: true,
   });
 
-  const onInterrupt = () => {
-    child.cancel();
-  };
-
-  process.on('SIGINT', onInterrupt);
+  children.push(child);
 
   try {
     await child;
   } finally {
-    process.off('SIGINT', onInterrupt);
+    removeChild(child);
   }
+
+  return child.exitCode;
 };
 
 module.exports = {

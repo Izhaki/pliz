@@ -42,7 +42,8 @@ const run = async () => {
 };
 
 run().catch(error => {
-  if (!error.isCanceled) {
-    console.log(error);
-  }
+  // Do nothing. In shell mode the shell will spit the error
+  // if (!error.isCanceled) {
+  //   console.log(error);
+  // }
 });
