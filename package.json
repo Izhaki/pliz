@@ -11,7 +11,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "postversion": "git push && git push --tags"
+    "pliz": "pliz"
   },
   "bin": {
     "pliz": "bin/pliz.js"
@@ -19,7 +19,8 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
-    "@babel/register": "^7.6.2"
+    "@babel/register": "^7.6.2",
+    "release": "^6.1.0"
   },
   "dependencies": {
     "execa": "^2.0.4"
