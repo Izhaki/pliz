@@ -8,8 +8,8 @@ const list = async () => {
   await exe('ls -lh');
 };
 
-const bump = async semver => {
-  await exe(`npm version ${semver}`);
+const bump = async ([versionType]) => {
+  await exe(`npm version ${versionType}`);
   await exe(`git push`);
   await exe(`git push --tags`);
 };
