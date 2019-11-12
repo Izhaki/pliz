@@ -19,12 +19,12 @@ yarn add pliz --dev
 
 ## 2. Create plizers
 
-Create the following `plizers.js` file in your project root:
+Create the following `plizers.js` file (or `/plizers/index.js`) in your project root:
 
 ```js
 const { exe, log } = require('pliz');
 
-const say = async ([text]) => {
+const say = ([text]) => {
   log(`${text}!`);
 };
 

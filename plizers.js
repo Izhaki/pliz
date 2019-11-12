@@ -1,6 +1,6 @@
 const { exe, log } = require('./index');
 
-const say = async ([text]) => {
+const say = ([text]) => {
   log(`${text}!`);
 };
 

@@ -2,9 +2,9 @@
 
 const { resolve } = require('path');
 
-const plizerConfig = resolve(process.cwd(), 'plize.config.js');
+const plizConfig = resolve(process.cwd(), 'plize.config.js');
 try {
-  require(plizerConfig);
+  require(plizConfig);
 } catch (error) {
   // Do nothing
 }
@@ -42,8 +42,7 @@ const run = async () => {
 };
 
 run().catch(error => {
-  // Do nothing. In shell mode the shell will spit the error
-  // if (!error.isCanceled) {
-  //   console.log(error);
-  // }
+  if (!error.isCanceled) {
+    console.log(error);
+  }
 });

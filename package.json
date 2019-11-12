@@ -10,6 +10,9 @@
   ],
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "postversion": "git push && git push --tags"
+  },
   "bin": {
     "pliz": "bin/pliz.js"
   },
