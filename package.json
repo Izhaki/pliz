@@ -1,6 +1,6 @@
 {
   "name": "pliz",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A minimalistic, makefile-like task runner for Node.",
   "author": "Izhaki <roey@gefri.org>",
   "keywords": [
