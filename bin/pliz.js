@@ -2,7 +2,7 @@
 
 const { resolve } = require('path');
 
-const plizerConfig = resolve(process.cwd(), 'plizers.config.js');
+const plizerConfig = resolve(process.cwd(), 'plize.config.js');
 try {
   require(plizerConfig);
 } catch (error) {
