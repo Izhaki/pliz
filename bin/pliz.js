@@ -42,7 +42,7 @@ const run = async () => {
 };
 
 run().catch(error => {
-  if (!error.isCanceled) {
+  if (!error.isCanceled && !error.alreadyShown) {
     console.log(error);
   }
 });

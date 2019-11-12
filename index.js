@@ -26,8 +26,10 @@ const exe = async command => {
 
   try {
     await child;
-  } catch (error) {
-    // Do nothing. In shell mode the shell will spit the error
+  } catch (originalError) {
+    const error = new Error(originalError.message);
+    error.alreadyShown = true;
+    throw error;
   } finally {
     removeChild(child);
   }
