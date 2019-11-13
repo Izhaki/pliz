@@ -1,12 +1,15 @@
 #!/usr/bin/env node
-
 const { resolve } = require('path');
 
-const plizConfig = resolve(process.cwd(), 'plize.config.js');
+const isModuleNotFound = error => error.code === 'MODULE_NOT_FOUND';
+
+const plizConfig = resolve(process.cwd(), 'pliz.config.js');
 try {
   require(plizConfig);
 } catch (error) {
-  // Do nothing
+  if (!isModuleNotFound(error)) {
+    throw error;
+  }
 }
 
 const [, , plizerName, ...args] = process.argv;
@@ -34,7 +37,7 @@ const run = async () => {
       outputPlizerNames(plizers);
     }
   } catch (error) {
-    if (error.code === 'MODULE_NOT_FOUND') {
+    if (isModuleNotFound(error)) {
       throw `No plizers found.`;
     }
     throw error;
