@@ -15,5 +15,5 @@ jobs:
         with:
           node-version: 12
       - run: yarn install
-      - run: yarn link
-      - run: ./node_modules/.bin/cucumber-js
+      - run: npm link
+      - run: pliz test
