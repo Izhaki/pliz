@@ -20,7 +20,11 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/register": "^7.6.2",
-    "release": "^6.1.0"
+    "chai": "^4.2.0",
+    "cucumber": "^6.0.4",
+    "fs-extra": "^8.1.0",
+    "release": "^6.1.0",
+    "tmp": "^0.1.0"
   },
   "dependencies": {
     "execa": "^2.0.4"

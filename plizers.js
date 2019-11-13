@@ -19,9 +19,14 @@ const publish = async () => {
   await exe('yarn release');
 };
 
+const test = async () => {
+  await exe('./node_modules/.bin/cucumber-js');
+};
+
 module.exports = {
   say,
   list,
   bump,
   publish,
+  test,
 };
