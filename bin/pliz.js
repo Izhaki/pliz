@@ -1,13 +1,28 @@
 #!/usr/bin/env node
 const { resolve } = require('path');
 
-const isModuleNotFound = error => error.code === 'MODULE_NOT_FOUND';
+/*
+Error message when pliz.config.js is not found:
+
+Cannot find module 'root/pliz.config.js'
+
+Error message when a file require in pliz.config.js is not found:
+
+Cannot find module './blackSwan'
+Require stack:
+- root/pliz.config.js
+- root/bin/pliz.js
+
+So we wrap the file name in quotation marks so not to match against the stack trace.
+*/
+const isModuleNotFound = (error, fileName) =>
+  error.code === 'MODULE_NOT_FOUND' && error.message.includes(`'${fileName}'`);
 
 const plizConfig = resolve(process.cwd(), 'pliz.config.js');
 try {
   require(plizConfig);
 } catch (error) {
-  if (!isModuleNotFound(error)) {
+  if (!isModuleNotFound(error, plizConfig)) {
     throw error;
   }
 }
@@ -37,7 +52,7 @@ const run = async () => {
       outputPlizerNames(plizers);
     }
   } catch (error) {
-    if (isModuleNotFound(error)) {
+    if (isModuleNotFound(error, plizerFile)) {
       throw `No plizers found.`;
     }
     throw error;

@@ -1,4 +1,4 @@
-Feature: Pliz
+Feature: Invoking Plizers
 
   Scenario: No plizers
     When I run "pliz"
