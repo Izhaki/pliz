@@ -5,9 +5,9 @@
 Pliz is a JS-idiomatic alternative to:
 
 - Makefiles
-- Long/complex scripts in `package.json`
+- Long, complex, or unclear scripts in `package.json`
 
-(And possibly a router for your existing development/build/deploy scripts.)
+It can also serve as a router for your existing development/build/deploy scripts.
 
 # Quick Start
 
@@ -19,7 +19,7 @@ yarn add pliz --dev
 
 ## 2. Create plizers
 
-Create the following `plizers.js` file (or `/plizers/index.js`) in your project root:
+Create the following `plizers.js` file (or `plizers/index.js`) in your project root:
 
 ```js
 const { exe, log } = require('pliz');
