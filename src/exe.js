@@ -14,10 +14,29 @@ const cancelAllChildren = () => {
   });
 };
 
+const markAsAlreadyShown = originalError => {
+  const error = new Error(originalError.message);
+  error.alreadyShown = true;
+  return error;
+};
+
 process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
-async function exeSingle(command) {
+const getCommandType = command => {
+  if (typeof command === 'string') {
+    return 'string';
+  } else if (isArray(command)) {
+    return 'array';
+  } else if (typeof command === 'object') {
+    return 'object';
+  }
+  throw new Error(
+    `Commands can be a string, array or object but got: ${command}`
+  );
+};
+
+const exeSingle = async command => {
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
@@ -27,26 +46,32 @@ async function exeSingle(command) {
 
   try {
     await child;
-  } catch (originalError) {
-    const error = new Error(originalError.message);
-    error.alreadyShown = true;
-    throw error;
+  } catch (error) {
+    throw markAsAlreadyShown(error);
   } finally {
     removeChild(child);
   }
-}
+};
 
-function exeSeries(commands) {
-  return commands.reduce(async (previousPromise, command) => {
-    await previousPromise;
-    return exeSingle(command);
-  }, Promise.resolve());
-}
-
-module.exports = async command => {
-  if (typeof command === 'string') {
-    return exeSingle(command);
-  } else if (isArray(command)) {
-    exeSeries(command);
+const exeSeries = async commands => {
+  for (const command of commands) {
+    await exeSingle(command);
   }
+};
+
+const exeParallel = async obj => {
+  const commands = Object.values(obj);
+  await Promise.all(commands.map(exeSingle));
+};
+
+const exeMap = {
+  string: exeSingle,
+  array: exeSeries,
+  object: exeParallel,
+};
+
+module.exports = command => {
+  const commandType = getCommandType(command);
+  const handler = exeMap[commandType];
+  return handler(command);
 };
