@@ -2,6 +2,8 @@
   <img width="100%" src="https://user-images.githubusercontent.com/880132/68632060-3287bd80-04e5-11ea-9e3c-bdd959755da3.png" />
 </p>
 
+[![Actions Status](https://github.com/izhaki/pliz/workflows/Tests/badge.svg)](https://github.com/izhaki/pliz/actions)
+
 Pliz is a JS-idiomatic alternative to:
 
 - Makefiles
