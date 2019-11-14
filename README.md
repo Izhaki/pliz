@@ -3,6 +3,7 @@
 </p>
 
 [![Actions Status](https://github.com/izhaki/pliz/workflows/Tests/badge.svg)](https://github.com/izhaki/pliz/actions)
+[![NPM Version](https://badge.fury.io/js/pliz.svg?style=flat)](https://npmjs.org/package/pliz)
 
 Pliz is a JS-idiomatic alternative to:
 
