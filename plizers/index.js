@@ -9,14 +9,20 @@ export const list = async () => {
 };
 
 export const bump = async ([versionType]) => {
-  await exe(`npm version ${versionType}`);
-  await exe(`git push`);
-  await exe(`git push --tags`);
+  // prettier-ignore
+  await exe([
+    `npm version ${versionType}`,
+    `git push`,
+    `git push --tags`
+  ]);
 };
 
 export const publish = async () => {
-  await exe('npm publish');
-  await exe('yarn release');
+  // prettier-ignore
+  await exe([
+    'npm publish',
+    'yarn release'
+  ]);
 };
 
 export const test = async params => {

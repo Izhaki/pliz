@@ -7,7 +7,7 @@ Feature: Invoking Plizers
   Scenario: Plizers in plizer.js
     Given the following "plizers.js" file:
       """
-      const { exe, log } = require('pliz');
+      const { log } = require('pliz');
 
       const say = ([text]) => {
         log(`${text}!`);
@@ -24,7 +24,7 @@ Feature: Invoking Plizers
   Scenario: Plizers in plizers/index.js
     Given the following "plizers/index.js" file:
       """
-      const { exe, log } = require('pliz');
+      const { log } = require('pliz');
 
       const say = ([text]) => {
         log(`${text}!`);

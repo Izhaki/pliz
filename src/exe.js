@@ -1,4 +1,5 @@
 const execa = require('execa');
+const { isArray } = Array;
 
 const children = [];
 
@@ -16,7 +17,7 @@ const cancelAllChildren = () => {
 process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
-module.exports = async command => {
+async function exeSingle(command) {
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
@@ -33,6 +34,19 @@ module.exports = async command => {
   } finally {
     removeChild(child);
   }
+}
 
-  return child.exitCode;
+function exeSeries(commands) {
+  return commands.reduce(async (previousPromise, command) => {
+    await previousPromise;
+    return exeSingle(command);
+  }, Promise.resolve());
+}
+
+module.exports = async command => {
+  if (typeof command === 'string') {
+    return exeSingle(command);
+  } else if (isArray(command)) {
+    exeSeries(command);
+  }
 };
