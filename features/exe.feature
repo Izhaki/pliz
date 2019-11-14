@@ -67,3 +67,23 @@ Scenario: Failing command with serial execution
       2
       """
 
+  Scenario: Failing command when executing in parallel
+    Other commands should still be executed
+    Given the following "plizers.js" file:
+      """
+      const { exe } = require('pliz');
+
+      const echo = async () => {
+        await exe({
+          0: 'blackSwan',
+          1: 'sleep 1 && echo 1',
+        });
+      };
+
+      module.exports = {
+        echo,
+      };
+      """
+    When I run "pliz echo"
+    Then the output should contain "blackSwan: command not found"
+    And the output should contain "1"
