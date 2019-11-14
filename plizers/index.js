@@ -1,4 +1,4 @@
-import { exe, log } from '../index';
+import { exe, log } from '../src/index';
 
 export const say = ([text]) => {
   log(`${text}!`);

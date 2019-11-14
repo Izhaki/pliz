@@ -16,7 +16,7 @@ const cancelAllChildren = () => {
 process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
-const exe = async command => {
+module.exports = async command => {
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
@@ -35,9 +35,4 @@ const exe = async command => {
   }
 
   return child.exitCode;
-};
-
-module.exports = {
-  exe,
-  log: console.log,
 };
