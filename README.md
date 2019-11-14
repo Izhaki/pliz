@@ -40,6 +40,44 @@ module.exports = {
 };
 ```
 
+<details>
+  <summary style="margin-bottom: 10px;">💡 Using ES6</summary>
+  
+```shell
+yarn add --dev @babel/core @babel/register @babel/preset-env
+```
+
+`pliz.config.js`:
+
+```js
+require('@babel/register')({
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: { node: 'current' },
+      },
+    ],
+  ],
+});
+```
+
+`plizers.js`:
+
+```js
+import { exe, log } from 'pliz';
+
+export const say = ([text]) => {
+  log(`${text}!`);
+};
+
+export const list = async () => {
+  await exe('ls -lh');
+};
+```
+
+</details>
+
 ## 3. Use
 
 In your shell:
