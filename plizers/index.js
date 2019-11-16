@@ -1,29 +1,26 @@
-import { exe, log } from '../src/index';
+import { exe, series, log } from '../src/index';
 
 export const say = ([text]) => {
   log(`${text}!`);
 };
 
-export const list = async () => {
-  await exe('ls -lh');
-};
+// prettier-ignore
+export const list = () => exe(
+  'ls -lh'
+);
 
-export const bump = async ([versionType]) => {
-  // prettier-ignore
-  await exe([
-    `npm version ${versionType}`,
-    `git push`,
-    `git push --tags`
-  ]);
-};
+// prettier-ignore
+export const bump = ([versionType]) => series([
+  `npm version ${versionType}`,
+  `git push`,
+  `git push --tags`
+]);
 
-export const publish = async () => {
-  // prettier-ignore
-  await exe([
-    'npm publish',
-    'yarn release'
-  ]);
-};
+// prettier-ignore
+export const publish = () => series([
+  'npm publish',
+  'yarn release'
+]);
 
 export const test = async params => {
   const scenarioName = params.join(' ');

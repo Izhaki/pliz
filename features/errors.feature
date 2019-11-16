@@ -8,14 +8,12 @@ Feature: Error outputing
     When I run "pliz"
     Then the output should contain "Cannot find module"
 
-Scenario: Command failure
+  Scenario: Command failure
     Given the following "plizers.js" file:
       """
       const { exe } = require('pliz');
 
-      const fail = async () => {
-        await exe(`blackSwan`);
-      };
+      const fail = () => exe(`blackSwan`);
 
       module.exports = {
         fail,

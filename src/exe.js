@@ -1,5 +1,4 @@
 const execa = require('execa');
-const { isArray } = Array;
 
 const children = [];
 
@@ -23,20 +22,7 @@ const markAsAlreadyShown = originalError => {
 process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
-const getCommandType = command => {
-  if (typeof command === 'string') {
-    return 'string';
-  } else if (isArray(command)) {
-    return 'array';
-  } else if (typeof command === 'object') {
-    return 'object';
-  }
-  throw new Error(
-    `Commands can be a string, array or object but got: ${command}`
-  );
-};
-
-const exeSingle = async command => {
+module.exports = async command => {
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
@@ -51,27 +37,4 @@ const exeSingle = async command => {
   } finally {
     removeChild(child);
   }
-};
-
-const exeSeries = async commands => {
-  for (const command of commands) {
-    await exeSingle(command);
-  }
-};
-
-const exeParallel = async obj => {
-  const commands = Object.values(obj);
-  await Promise.all(commands.map(exeSingle));
-};
-
-const exeMap = {
-  string: exeSingle,
-  array: exeSeries,
-  object: exeParallel,
-};
-
-module.exports = command => {
-  const commandType = getCommandType(command);
-  const handler = exeMap[commandType];
-  return handler(command);
 };
