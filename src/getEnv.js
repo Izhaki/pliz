@@ -19,11 +19,8 @@ const getYarnEnv = async () => {
 };
 
 const getEnv = async () => {
-  try {
-    return getYarnEnv();
-  } catch (error) {
-    return getNpmEnv();
-  }
+  const isYarn = process.env.pliz_packageManager === 'yarn';
+  return isYarn ? getYarnEnv() : getNpmEnv();
 };
 
 module.exports = getEnv;

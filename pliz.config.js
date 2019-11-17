@@ -8,3 +8,7 @@ require('@babel/register')({
     ],
   ],
 });
+
+module.exports = {
+  packageManager: 'yarn',
+};

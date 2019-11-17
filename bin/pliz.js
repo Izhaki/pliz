@@ -20,7 +20,10 @@ const isModuleNotFound = (error, fileName) =>
 
 const plizConfig = resolve(process.cwd(), 'pliz.config.js');
 try {
-  require(plizConfig);
+  const config = require(plizConfig);
+  if (config.packageManager === 'yarn') {
+    process.env.pliz_packageManager = 'yarn';
+  }
 } catch (error) {
   if (!isModuleNotFound(error, plizConfig)) {
     throw error;
