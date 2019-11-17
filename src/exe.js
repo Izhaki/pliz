@@ -1,5 +1,7 @@
 const execa = require('execa');
+const getEnv = require('./getEnv');
 
+let env;
 const children = [];
 
 const removeChild = child => {
@@ -23,9 +25,11 @@ process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
 module.exports = async command => {
+  env = env || (await getEnv());
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
+    env,
   });
 
   children.push(child);

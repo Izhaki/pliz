@@ -25,5 +25,5 @@ export const publish = () => series([
 export const test = async params => {
   const scenarioName = params.join(' ');
   const scenarioParam = scenarioName ? `--name "${scenarioName}"` : '';
-  await exe(`./node_modules/.bin/cucumber-js ${scenarioParam}`);
+  await exe(`cucumber-js ${scenarioParam}`);
 };
