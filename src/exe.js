@@ -31,12 +31,11 @@ module.exports = async command => {
   const child = execa.command(command, {
     stdio: 'inherit',
     shell: true,
-    env,
     // If the command is for npm or yarn, don't use the provided environment
     // (npm by default, but can be set to yarn). So if yarn is set as the package
     // manager in the config, and the command is `npm publish`, we don't get
     // registry.yarnpkg.com in the env
-    extendEnv: !isPackageManagerCommand,
+    env: isPackageManagerCommand ? process.env : env,
   });
 
   children.push(child);
