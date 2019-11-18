@@ -1,20 +1,24 @@
 {
   "name": "pliz",
   "version": "0.5.0",
-  "description": "A minimalistic, makefile-like task runner for Node.",
   "author": "Izhaki <roey@gefri.org>",
+  "description": "A minimalistic, makefile-like task runner for Node.",
   "keywords": [
     "node",
     "tasks",
     "makefile"
   ],
-  "main": "src/index.js",
+  "repository": "https://github.com/Izhaki/pliz.git",
   "license": "MIT",
-  "scripts": {
-    "pliz": "pliz"
+  "bugs": {
+    "url": "https://github.com/Izhaki/pliz/issues"
   },
+  "main": "src/index.js",
   "bin": {
     "pliz": "bin/pliz.js"
+  },
+  "scripts": {
+    "pliz": "pliz"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
