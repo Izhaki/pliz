@@ -8,6 +8,9 @@ Before(async function() {
   symLinkNodeModules();
 
   await exe(`yarn link pliz`);
+
+  // pliz searches for project root based on package.json
+  await writeFile('package.json', '{}');
   this.exe = exe;
   this.writeFile = writeFile;
 });

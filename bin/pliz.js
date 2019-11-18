@@ -16,7 +16,9 @@ const getRootFolder = () => {
     current = dirname(current);
   } while (current !== previous);
 
-  return null;
+  throw new Error(
+    'pliz: could not project root - no package.json in any parent folder'
+  );
 };
 
 const cwd = getRootFolder();

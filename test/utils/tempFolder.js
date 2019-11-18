@@ -22,7 +22,8 @@ export default () => {
     });
   };
 
-  const exe = command => execa.command(command, { cwd: tempFolder });
+  const exe = (command, options = { cwd: tempFolder }) =>
+    execa.command(command, options);
 
   const writeFile = (fileName, content) => {
     const outputPath = path.join(tempFolder, fileName);
