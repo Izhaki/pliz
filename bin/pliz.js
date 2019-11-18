@@ -1,5 +1,32 @@
 #!/usr/bin/env node
-const { resolve } = require('path');
+const { resolve, normalize, join, dirname } = require('path');
+const { existsSync } = require('fs');
+
+const isRootFolder = path => existsSync(join(path, 'package.json'));
+
+const getRootFolder = () => {
+  let previous = null;
+  let current = normalize(process.cwd());
+
+  do {
+    if (isRootFolder(current)) {
+      return current;
+    }
+    previous = current;
+    current = dirname(current);
+  } while (current !== previous);
+
+  return null;
+};
+
+const cwd = getRootFolder();
+
+/*
+Change the process.cwd to the root folder (where package.json is).
+Not doing so can cause troubles, for example, @babel/register won't kick in unless
+cwd is provided explicitly.
+*/
+process.chdir(cwd);
 
 /*
 Error message when pliz.config.js is not found:
@@ -18,7 +45,7 @@ So we wrap the file name in quotation marks so not to match against the stack tr
 const isModuleNotFound = (error, fileName) =>
   error.code === 'MODULE_NOT_FOUND' && error.message.includes(`'${fileName}'`);
 
-const plizConfig = resolve(process.cwd(), 'pliz.config.js');
+const plizConfig = resolve(cwd, 'pliz.config.js');
 try {
   const config = require(plizConfig);
   if (config.packageManager === 'yarn') {
@@ -40,7 +67,7 @@ const outputPlizerNames = plizers => {
 };
 
 const run = async () => {
-  const plizerFile = resolve(process.cwd(), 'plizers');
+  const plizerFile = resolve(cwd, 'plizers');
 
   try {
     const plizers = require(plizerFile);
