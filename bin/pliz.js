@@ -2,7 +2,7 @@
 const { resolve, normalize, join, dirname } = require('path');
 const { existsSync } = require('fs');
 
-const isRootFolder = path => existsSync(join(path, 'package.json'));
+const isRootFolder = (path) => existsSync(join(path, 'package.json'));
 
 const getRootFolder = () => {
   let previous = null;
@@ -61,9 +61,9 @@ try {
 
 const [, , plizerName, ...args] = process.argv;
 
-const outputPlizerNames = plizers => {
+const outputPlizerNames = (plizers) => {
   console.log('Available plizers:');
-  Object.keys(plizers).forEach(plizer => {
+  Object.keys(plizers).forEach((plizer) => {
     console.log(plizer);
   });
 };
@@ -91,7 +91,7 @@ const run = async () => {
   }
 };
 
-run().catch(error => {
+run().catch((error) => {
   if (!error.isCanceled && !error.alreadyShown) {
     console.log(error);
   }

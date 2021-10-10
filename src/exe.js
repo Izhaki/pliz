@@ -4,18 +4,18 @@ const getEnv = require('./getEnv');
 let env;
 const children = [];
 
-const removeChild = child => {
+const removeChild = (child) => {
   const index = children.indexOf(child);
   children.splice(index, 1);
 };
 
 const cancelAllChildren = () => {
-  children.forEach(child => {
+  children.forEach((child) => {
     child.cancel();
   });
 };
 
-const markAsAlreadyShown = originalError => {
+const markAsAlreadyShown = (originalError) => {
   const error = new Error(originalError.message);
   error.alreadyShown = true;
   return error;
@@ -24,7 +24,7 @@ const markAsAlreadyShown = originalError => {
 process.on('SIGINT', cancelAllChildren);
 process.on('SIGTERM', cancelAllChildren);
 
-module.exports = async command => {
+module.exports = async (command) => {
   env = env || (await getEnv());
   const isPackageManagerCommand =
     command.startsWith('npm') || command.startsWith('yarn');

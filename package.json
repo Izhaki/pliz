@@ -28,6 +28,7 @@
     "cucumber": "^6.0.4",
     "cucumber-pretty": "6",
     "fs-extra": "^8.1.0",
+    "prettier": "^2.4.1",
     "release": "^6.1.0",
     "tmp": "^0.1.0"
   },

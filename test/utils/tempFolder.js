@@ -14,7 +14,7 @@ export default () => {
 
     const moduleNames = fs.readdirSync(fromNodeModulesDir);
 
-    moduleNames.forEach(moduleName => {
+    moduleNames.forEach((moduleName) => {
       const fromNodeModuleDir = path.join(fromNodeModulesDir, moduleName);
       const toNodeModuleDir = path.join(toNodeModulesDir, moduleName);
 
