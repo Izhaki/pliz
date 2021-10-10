@@ -11,9 +11,9 @@ Feature: Error outputing
   Scenario: Command failure
     Given the following "plizers.js" file:
       """
-      const { exe } = require('pliz');
+      const { $ } = require('zx');
 
-      const fail = () => exe(`blackSwan`);
+      const fail = () => $`blackSwan`;
 
       module.exports = {
         fail,

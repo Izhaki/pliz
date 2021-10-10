@@ -1,22 +1,18 @@
-import { exe } from '../src/index';
+import { $ } from 'zx';
 
 export const say = ([text]) => {
   console.log(`${text}!`);
 };
 
 // prettier-ignore
-export const list = () => exe(
-  'ls -lh'
-);
+export const list = () => $`ls -lh`;
 
 export const test = async (params) => {
   const scenarioName = params.join(' ');
   const scenarioParam = scenarioName ? `--name "${scenarioName}"` : '';
-  await exe(`cucumber-js ${scenarioParam}`);
+  await $`npx cucumber-js ${scenarioParam}`;
 };
 
 export const prettify = async () => {
-  await exe(
-    `prettier '{**/,}*.{js,jsx,ts,tsx,json,md,html,yaml,yml}' --ignore-path=.gitignore --write`
-  );
+  await $`npx prettier '{**/,}*.{js,jsx,ts,tsx,json,md,html,yaml,yml}' --ignore-path=.gitignore --write`;
 };
