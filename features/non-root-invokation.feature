@@ -4,10 +4,8 @@ Feature: Non root invokation
   Scenario: Run pliz outside root folder
     Given the following "plizers.js" file:
       """
-      import { log } from 'pliz';
-
       export const say = ([text]) => {
-        log(`${text}!`);
+        console.log(`${text}!`);
       };
       """
     And the following "pliz.config.js" file:
@@ -29,10 +27,8 @@ Feature: Non root invokation
   Scenario: No package.json
     Given the following "plizers.js" file:
       """
-      const { log } = require('pliz');
-
       const say = ([text]) => {
-        log(`${text}!`);
+        console.log(`${text}!`);
       };
 
       module.exports = {

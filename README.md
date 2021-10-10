@@ -25,10 +25,10 @@ yarn add pliz --dev
 Create the following `plizers.js` file (or `plizers/index.js`) in your project root:
 
 ```js
-const { exe, log } = require('pliz');
+const { exe } = require('pliz');
 
 const say = ([text]) => {
-  log(`${text}!`);
+  console.log(`${text}!`);
 };
 
 const list = () => exe('ls -lh');
@@ -65,10 +65,10 @@ require('@babel/register')({
 `plizers.js`:
 
 ```js
-import { exe, log } from 'pliz';
+import { exe } from 'pliz';
 
 export const say = ([text]) => {
-  log(`${text}!`);
+  console.log(`${text}!`);
 };
 
 export const list = () => exe('ls -lh');

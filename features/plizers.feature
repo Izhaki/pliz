@@ -7,10 +7,8 @@ Feature: Invoking Plizers
   Scenario: Plizers in plizer.js
     Given the following "plizers.js" file:
       """
-      const { log } = require('pliz');
-
       const say = ([text]) => {
-        log(`${text}!`);
+        console.log(`${text}!`);
       };
 
       module.exports = {
@@ -24,10 +22,8 @@ Feature: Invoking Plizers
   Scenario: Plizers in plizers/index.js
     Given the following "plizers/index.js" file:
       """
-      const { log } = require('pliz');
-
       const say = ([text]) => {
-        log(`${text}!`);
+        console.log(`${text}!`);
       };
 
       module.exports = {
@@ -41,10 +37,8 @@ Feature: Invoking Plizers
   Scenario: ES6 plizers
     Given the following "plizers.js" file:
       """
-      import { log } from 'pliz';
-
       export const say = ([text]) => {
-        log(`${text}!`);
+        console.log(`${text}!`);
       };
       """
     And the following "pliz.config.js" file:

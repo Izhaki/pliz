@@ -1,7 +1,7 @@
-import { exe, log } from '../src/index';
+import { exe } from '../src/index';
 
 export const say = ([text]) => {
-  log(`${text}!`);
+  console.log(`${text}!`);
 };
 
 // prettier-ignore
