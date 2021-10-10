@@ -2,11 +2,11 @@
   "name": "pliz",
   "version": "0.5.1",
   "author": "Izhaki <roey@gefri.org>",
-  "description": "A minimalistic, makefile-like task runner for Node.",
+  "description": "A minimalistic task router for Node.",
   "keywords": [
     "node",
     "tasks",
-    "makefile"
+    "cli"
   ],
   "repository": "https://github.com/Izhaki/pliz.git",
   "license": "MIT",

@@ -4,7 +4,6 @@ export const say = ([text]) => {
   console.log(`${text}!`);
 };
 
-// prettier-ignore
 export const list = () => $`ls -lh`;
 
 export const test = async (params) => {

@@ -5,19 +5,31 @@
 [![Actions Status](https://github.com/izhaki/pliz/workflows/Tests/badge.svg)](https://github.com/izhaki/pliz/actions)
 [![NPM Version](https://badge.fury.io/js/pliz.svg?style=flat)](https://npmjs.org/package/pliz)
 
-Pliz is a JS-idiomatic alternative to:
+Pliz is a cli tool that invokes JS functions (typically development, build, or deploy tasks).
 
-- Makefiles
-- Long, complex, or unclear scripts in `package.json`
+# Rationale
 
-It can also serve as a router for your existing development/build/deploy scripts.
+Modern Javascript projects involve a multitude of development tasks. Typically these live in:
+
+- `package.json` script commands, possible issues with which:
+  - shell rather than JS
+  - no comments
+  - sometimes require extra dependencies (eg, `cross-env`)
+  - parametrisation can be tricky
+- `scripts` folder
+  - onboarding and discoverability may be sub-optimal
+- Our heads
+  - What's the command to kill a process? Do everyone remember `-9`? What about Windows?
+  - What's the command to enter a docker image interactive shell again?
+
+Pliz reduces the team's cognitive load by offering a single source of truth to all these.
 
 # Quick Start
 
 ## 1. Install
 
 ```shell
-yarn add pliz --dev
+npm i -g pliz
 ```
 
 ## 2. Create plizers
@@ -72,5 +84,18 @@ In your shell:
 
 ```shell
 pliz say Hello
-pliz list
+```
+
+# Advance Usage
+
+Pliz can be supercharged with [Google's zx](https://github.com/google/zx) for more shell power.
+
+```js
+import { $ } from 'zx';
+
+export async function bump([versionType]) {
+  await $`npm version ${versionType}`;
+  await $`git push`;
+  await $`git push --tags`;
+}
 ```
