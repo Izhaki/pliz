@@ -1,4 +1,4 @@
-import { exe, series, log } from '../src/index';
+import { exe, log } from '../src/index';
 
 export const say = ([text]) => {
   log(`${text}!`);
@@ -8,19 +8,6 @@ export const say = ([text]) => {
 export const list = () => exe(
   'ls -lh'
 );
-
-// prettier-ignore
-export const bump = ([versionType]) => series([
-  `npm version ${versionType}`,
-  `git push`,
-  `git push --tags`
-]);
-
-// prettier-ignore
-export const publish = () => series([
-  'npm publish',
-  'yarn release'
-]);
 
 export const test = async (params) => {
   const scenarioName = params.join(' ');
