@@ -13,17 +13,20 @@
   "bugs": {
     "url": "https://github.com/Izhaki/pliz/issues"
   },
-  "main": "src/index.js",
   "bin": {
     "pliz": "bin/pliz.js"
   },
   "scripts": {
-    "pliz": "pliz"
+    "pliz": "pliz",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/register": "^7.6.2",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/exec": "^6.0.2",
+    "@semantic-release/git": "^10.0.1",
     "chai": "^4.2.0",
     "cucumber": "^6.0.4",
     "cucumber-pretty": "6",
@@ -31,6 +34,7 @@
     "fs-extra": "^8.1.0",
     "prettier": "^2.4.1",
     "release": "^6.1.0",
+    "semantic-release": "^18.0.1",
     "tmp": "^0.1.0",
     "zx": "^4.2.0"
   },

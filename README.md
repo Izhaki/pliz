@@ -7,6 +7,29 @@
 
 Pliz is a cli tool that invokes JS functions (typically development, build, or deploy tasks).
 
+---
+
+Pliz can be supercharged with [Google's zx](https://github.com/google/zx) for more shell power.
+
+So when calling:
+
+```shell
+pliz bump minor
+```
+
+This function will be called:
+
+```js
+// plizers.js
+import { $ } from 'zx';
+
+export async function bump([versionType]) {
+  await $`npm version ${versionType}`;
+  await $`git push`;
+  await $`git push --tags`;
+}
+```
+
 # Rationale
 
 Modern Javascript projects involve a multitude of development tasks. Typically these live in:
@@ -84,18 +107,4 @@ In your shell:
 
 ```shell
 pliz say Hello
-```
-
-# Advance Usage
-
-Pliz can be supercharged with [Google's zx](https://github.com/google/zx) for more shell power.
-
-```js
-import { $ } from 'zx';
-
-export async function bump([versionType]) {
-  await $`npm version ${versionType}`;
-  await $`git push`;
-  await $`git push --tags`;
-}
 ```

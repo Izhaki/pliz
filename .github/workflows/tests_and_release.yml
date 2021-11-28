@@ -1,0 +1,33 @@
+name: Test & Release
+
+on: push
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.17
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - run: npm link # yarn link doesn't work
+
+      - name: Test
+        run: pliz test
+
+      - name: Release
+        if: github.ref == 'refs/heads/master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
