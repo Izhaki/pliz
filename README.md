@@ -7,17 +7,17 @@
 
 Pliz is a cli tool that invokes JS functions (typically development, build, or deploy tasks).
 
----
+Pliz can be supercharged with [Google's zx](https://github.com/google/zx) for ultimate shell power.
 
-Pliz can be supercharged with [Google's zx](https://github.com/google/zx) for more shell power.
+# Example
 
-So when calling:
+When calling:
 
 ```shell
-pliz bump minor
+$ pliz bump minor
 ```
 
-This function will be called:
+A function like this may be invoked:
 
 ```js
 // plizers.js
@@ -32,27 +32,38 @@ export async function bump([versionType]) {
 
 # Rationale
 
+## With pliz
+
+- All tasks are written in javascript and can be easily invoked from command line<sup>1</sup>.
+- Single source of truth, in a single file/folder.
+- Reduction of cognitive load.
+
+<sup>1</sup> _Existing shell scripts do not need migration as their invocation is still possible (via javascript)._
+
+## Without pliz
+
 Modern Javascript projects involve a multitude of development tasks. Typically these live in:
 
-- `package.json` script commands, possible issues with which:
-  - shell rather than JS
+- `package.json` script commands:
+  - shell syntax
   - no comments
   - sometimes require extra dependencies (eg, `cross-env`)
-  - parametrisation can be tricky
+  - parametrisation and branching can be tricky
+- **shell scripts**:
+  - another syntax to learn and maintain
+  - shells may differ across machines
 - `scripts` folder
   - onboarding and discoverability may be sub-optimal
-- Our heads
+- **our heads**:
   - What's the command to kill a process? Do everyone remember `-9`? What about Windows?
   - What's the command to enter a docker image interactive shell again?
 
-Pliz reduces the team's cognitive load by offering a single source of truth to all these.
-
 # Quick Start
 
-## 1. Install
+## 1. Install Globally
 
 ```shell
-npm i -g pliz
+$ npm i -g pliz
 ```
 
 ## 2. Create plizers
@@ -106,5 +117,5 @@ export const say = ([text]) => {
 In your shell:
 
 ```shell
-pliz say Hello
+$ pliz say Hello
 ```
