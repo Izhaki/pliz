@@ -1,6 +1,6 @@
 {
   "name": "pliz",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "author": "Izhaki <roey@gefri.org>",
   "description": "A minimalistic task router for Node.",
   "keywords": [
