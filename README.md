@@ -2,8 +2,14 @@
   <img width="100%" src="https://user-images.githubusercontent.com/880132/68632060-3287bd80-04e5-11ea-9e3c-bdd959755da3.png" />
 </p>
 
-[![Actions Status](https://github.com/izhaki/pliz/workflows/Tests/badge.svg)](https://github.com/izhaki/pliz/actions)
-[![NPM Version](https://badge.fury.io/js/pliz.svg?style=flat)](https://npmjs.org/package/pliz)
+<p align="center">
+  <a aria-label="Build" href="https://github.com/Izhaki/pliz/actions/workflows/tests_and_release.yml">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/Izhaki/pliz/Test%20&%20Release?style=flat-square">
+  </a>
+  <a aria-label="NPM version" href="https://npmjs.org/package/pliz">
+    <img alt="" src="https://img.shields.io/npm/v/pliz?style=flat-square">
+  </a>
+</p>
 
 Pliz is a cli tool that invokes JS functions (typically development, build, or deploy tasks).
 
