@@ -37,7 +37,7 @@
     "husky": "^7.0.4",
     "prettier": "^2.4.1",
     "release": "^6.1.0",
-    "semantic-release": "^18.0.1",
+    "semantic-release": "^19.0.3",
     "tmp": "^0.1.0",
     "zx": "^4.2.0"
   },
